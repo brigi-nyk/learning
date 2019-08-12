@@ -10,11 +10,13 @@ using System.Windows.Forms;
 
 namespace MyProject
 {
-    public partial class Form1 : Form
+    public partial class MainSudokuForm : Form
     {
-        public Form1()
+        public MainSudokuForm()
         {
             InitializeComponent();
         }
+
+        
     }
 }
