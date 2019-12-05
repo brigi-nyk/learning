@@ -2,22 +2,46 @@
 <html>
 <head>
     <title>Dutch Treat</title>
+    <link href="css/site.css" rel="stylesheet" />
+    
 </head>
 <body>
     <h2>Dutch Treat</h2>
     <p>This is going to be a site where we can buy dutch artists merchandise.</p>
     
 
-    <div>
+    <div class="product-info">
         <img src="img/IMG_landscape1.jpg" />
         <h3>Mug</h3>
-        <ul>
+        <ul class="product-props">
             <li>Price: $9.99</li>
             <li>Artist: Antal Marta</li>
             <li>Title: </li>
             <li>Description: Landscape</li>
         </ul>
         <button>Buy</button>
+    </div>
+    <div id="theForm">
+        <form>
+            <label>Your Name:</label>
+            <br />
+            <input />
+            <br />
+            <label>Email:</label>
+            <br />
+            <input type="email" />
+            <br />
+            <label>Subject:</label>
+            <br />
+            <input type="text" />
+            <br />
+            <label>Message:</label>
+            <br />
+            <textarea rows="4"></textarea>
+            <br />
+            <input type="submit" value="Send Message" />
+
+        </form>
     </div>
 </body>
 </html> 
