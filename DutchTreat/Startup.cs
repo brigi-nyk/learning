@@ -26,6 +26,7 @@ namespace DutchTreat
             // if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+               // app.UseBrowserLink();
             }
             else
             {
@@ -43,10 +44,7 @@ namespace DutchTreat
                     "{controller}/{action}/{id?}",
                     new { controller = "App", action = "Index" });
             });
-            //if (env.IsDevelopment())
-            //{
-            //    app.UseDeveloperExceptionPage();
-            //}
+            
 
             //app.UseRouting();
 

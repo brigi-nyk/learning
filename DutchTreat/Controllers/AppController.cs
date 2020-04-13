@@ -14,5 +14,20 @@ namespace DutchTreat.Controllers
             //throw new InvalidOperationException();
             return View();
         }
+
+        [HttpGet("contact")]
+        public IActionResult Contact()
+        {
+            ViewBag.Title = "Contact Us";
+
+            return View();
+        }
+
+        public IActionResult About()
+        {
+            ViewBag.Title = "About Us";
+
+            return View();
+        }
     }
 }
