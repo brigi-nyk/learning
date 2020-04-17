@@ -1,13 +1,15 @@
-﻿using System;
+﻿using Acme.Common;
+using System;
 using System.Collections.Generic;
 
 namespace ACM.BL
 {
-    public class Customer
+    public class Customer: EntityBase, ILoggable
     {
         private string _lastName;
 
         public int CustomerId { get; private set; }
+        public int CustomerType { get; set; }
         public string FirstName { get; set; }
         public string LastName
         {
@@ -40,28 +42,25 @@ namespace ACM.BL
 
         public string EmailAddress { get; set; }
 
-        public static int InstanceCount{ get; set; }
+        public static int InstanceCount { get; set; }
 
-        public Customer()
+        public List<Address> Addresses { get; set; }
+
+        public Customer() : this(0)
         {
-
         }
 
         public Customer(int customerId)
         {
             CustomerId = customerId;
+            Addresses = new List<Address>();
         }
-
-
-        
-
-        
 
         /// <summary>
         /// Validate the customer data.
         /// </summary>
         /// <returns></returns>
-        public bool Validate()
+        public override bool Validate()
         {
             var isValid = true;
 
@@ -70,5 +69,19 @@ namespace ACM.BL
 
             return isValid;
         }
+
+        public override string ToString() => FullName;
+
+        //public string Log()
+        //{
+        //    var logString = CustomerId + " " +
+        //        FullName + " " +
+        //        "Email" + EmailAddress;
+        //    return logString;
+        //}
+
+        public string Log() => $"{CustomerId}: {FullName} Email: {EmailAddress} State: {EntityState}";
+
+        
     }
 }

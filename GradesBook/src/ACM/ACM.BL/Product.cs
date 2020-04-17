@@ -1,13 +1,27 @@
-﻿using System;
+﻿using Acme.Common;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace ACM.BL
 {
-    public class Product
+    public class Product : EntityBase, ILoggable
     {
+        private string _productName;
+
         public int ProductId { get; private set; }
-        public string ProductName { get; set; }
+        public string ProductName { get
+            {
+                return _productName.InsertSpaces();
+            }
+            set
+            {
+                _productName = value;
+            }
+        }
+
+        
+
         public string ProductDescription { get; set; }
         public decimal? CurrentPrice { get; set; }
 
@@ -25,7 +39,7 @@ namespace ACM.BL
         /// Validate the product data.
         /// </summary>
         /// <returns></returns>
-        public bool Validate()
+        public override bool Validate()
         {
             var isValid = true;
 
@@ -34,5 +48,8 @@ namespace ACM.BL
 
             return isValid;
         }
+
+        public override string ToString() => ProductName;
+        public string Log() => $"{ProductId}: {ProductName} Detail: {ProductDescription} State: {EntityState}";
     }
 }

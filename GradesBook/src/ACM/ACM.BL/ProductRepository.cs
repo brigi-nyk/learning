@@ -23,6 +23,10 @@ namespace ACM.BL
                 prod.CurrentPrice = 15.96M;
             }
 
+            Object ob = new Object();
+            Console.WriteLine($"Object: {ob.ToString()}");
+            Console.WriteLine($"Object: {prod.ToString()}");
+
             return prod;
         }
 
@@ -41,11 +45,29 @@ namespace ACM.BL
         /// Saves the current product
         /// </summary>
         /// <returns></returns>
-        public bool Save()
+        public bool Save(Product prod)
         {
-            //code that saves teh defined product
+            var success = true;
+            if (prod.HasChanges)
+            {
+                if (prod.IsValid)
+                {
+                    if (prod.IsNew)
+                    {
 
-            return true;
+                    }
+                    else
+                    {
+
+                    }
+                }
+                else
+                {
+                    success = false;
+                }
+            }
+
+            return success;
         }
 
     }
