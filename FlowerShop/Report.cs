@@ -13,7 +13,7 @@ namespace FlowerShop
         Year
     }
 
-    class Report
+    public class Report
     {
         #region Attributes 
 

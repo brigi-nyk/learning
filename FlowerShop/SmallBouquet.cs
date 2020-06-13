@@ -2,7 +2,7 @@
 
 namespace FlowerShop
 {
-    internal class SmallBouquet: Bouquet
+    public class SmallBouquet: Bouquet
     {
         #region Methods
 

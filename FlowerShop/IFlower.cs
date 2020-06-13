@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FlowerShop
 {
-    interface IFlower
+    public interface IFlower
     {
         int Price { get; }
         void DefinePrice();

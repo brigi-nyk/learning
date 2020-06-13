@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FlowerShop
 {
-    abstract class Bouquet
+    public abstract class Bouquet
     {
         #region Members
 
@@ -36,7 +36,7 @@ namespace FlowerShop
         /// </summary>
         /// <param name="noBouquets">Number of bouquets.</param>
         /// <returns>Returns the total number of roses.</returns>
-        virtual internal int GetTotalQuantityRoses(int noBouquets)
+        virtual public int GetTotalQuantityRoses(int noBouquets)
         {
             return RoseQuantity * noBouquets;
         }
@@ -45,7 +45,7 @@ namespace FlowerShop
         /// Calculate the price of the bouquet.
         /// </summary>
         /// <returns>Returns the price in int.</returns>
-        virtual internal int CalcuatePrice()
+        virtual public int CalcuatePrice()
         {
             int price = PackingPrice + (RoseQuantity * rose.Price);
             return price;

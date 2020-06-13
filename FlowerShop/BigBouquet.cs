@@ -2,7 +2,7 @@
 
 namespace FlowerShop
 {
-    internal class BigBouquet : Bouquet
+    public class BigBouquet : Bouquet
     {
         #region Members
 
@@ -38,7 +38,7 @@ namespace FlowerShop
         /// Calculate the price of the bouquet.
         /// </summary>
         /// <returns>Returns the price in int.</returns>
-        internal override int CalcuatePrice()
+        public override int CalcuatePrice()
         {
             int price = base.CalcuatePrice();
 
@@ -52,7 +52,7 @@ namespace FlowerShop
         /// </summary>
         /// <param name="noBouquets">Number of bouquets.</param>
         /// <returns>Returns the total number of gladiolis.</returns>
-        internal int GetTotalQuantityGladiolis(int noBouquets)
+        public int GetTotalQuantityGladiolis(int noBouquets)
         {
             return GladiolisQuantity * noBouquets;
         }
@@ -62,7 +62,7 @@ namespace FlowerShop
         /// </summary>
         /// <param name="noBouquets">Number of bouquets.</param>
         /// <returns>Returns the total number of orchids.</returns>
-        internal int GetTotalQuantityOrchids(int noBouquets)
+        public int GetTotalQuantityOrchids(int noBouquets)
         {
             return OrchidQuantity * noBouquets;
         }
