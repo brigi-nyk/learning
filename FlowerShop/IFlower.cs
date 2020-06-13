@@ -6,5 +6,7 @@ namespace FlowerShop
 {
     interface IFlower
     {
+        int Price { get; }
+        void DefinePrice();
     }
 }

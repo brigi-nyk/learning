@@ -19,6 +19,11 @@ namespace FlowerShop
 
         #endregion Properties
 
+        #region Methods
+
+        /// <summary>
+        /// Create instance of the Reader.
+        /// </summary>
         public Reader()
         {
             FirstInterval = Interval.None;
@@ -78,6 +83,8 @@ namespace FlowerShop
                 NoSmallBouquets, NoRoses, NoGladiolis, NoOrchids);
             report.CreateReport(RequestedInterval);
         }
+
+        #endregion Methods
 
         #region Private Methods
 
