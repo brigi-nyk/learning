@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FlowerShop
 {
-    class Orchid : IFlower
+    public class Orchid : IFlower
     {
         #region Properties
 
