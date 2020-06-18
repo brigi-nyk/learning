@@ -1,12 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace FlowerShop
 {
     internal class Reader
     {
 
-        #region Properties
+        #region Members
 
+        public double PriceRose { get; set; }
+        public double PriceGladioli { get; set; }
+        public double PriceOrchid { get; set; }
         public int NoBigBouquets { get; set; }
         public int NoMediumBouquets { get; set; }
         public int NoSmallBouquets { get; set; }
@@ -17,7 +21,14 @@ namespace FlowerShop
         public Interval FirstInterval { get; set; }
         public Interval RequestedInterval { get; set; }
 
-        #endregion Properties
+        public Rose rose;
+        public Gladioli gladioli;
+        public Orchid orchid;
+        public BigBouquet bigBouquet;
+        public MediumBouquet mediumBouquet;
+        public SmallBouquet smallBouquet;
+
+        #endregion Members
 
         #region Methods
 
@@ -26,6 +37,9 @@ namespace FlowerShop
         /// </summary>
         public Reader()
         {
+            PriceRose = 0;
+            PriceGladioli = 0;
+            PriceOrchid = 0;
             FirstInterval = Interval.None;
             NoBigBouquets = 0;
             NoMediumBouquets = 0;
@@ -39,9 +53,14 @@ namespace FlowerShop
         /// <summary>
         /// Reads all values from the console.
         /// </summary>
-        internal void ReadAllValues()
+        public void ReadAllValues()
         {
-            Console.WriteLine("Please insert a number that corresponds to an interval and press Enter: ");
+            Console.WriteLine("Set the prices for the flowers:");
+            PriceRose = ReadPrice("Rose");
+            PriceGladioli = ReadPrice("Gladioli");
+            PriceOrchid = ReadPrice("Orchid");
+
+            Console.WriteLine("Insert a number that corresponds to an interval and press Enter: ");
 
             var values = Enum.GetValues(typeof(Interval));
             foreach (var value in values)
@@ -49,20 +68,12 @@ namespace FlowerShop
                 Console.WriteLine(((int)value).ToString() + ": " + value);
             }
 
-            
             do
             {
                 FirstInterval = GetValidIntervalValue(Console.ReadLine());
             } while (FirstInterval == Interval.None);
 
-            NoBigBouquets = ReadQuantity("big bouquets", FirstInterval);
-            NoMediumBouquets = ReadQuantity("medium bouquets", FirstInterval);
-            NoSmallBouquets = ReadQuantity("small bouquets", FirstInterval);
-            NoRoses = ReadQuantity("roses", FirstInterval);
-            NoGladiolis = ReadQuantity("gladiolis", FirstInterval);
-            NoOrchids = ReadQuantity("orchids", FirstInterval);
-
-            Console.WriteLine("Please insert a number that corresponds to an interval in order to create a report");
+            Console.WriteLine("Insert a number that corresponds to an interval in order to create a report");
             do
             {
                 RequestedInterval = GetValidIntervalValue(Console.ReadLine());
@@ -72,15 +83,37 @@ namespace FlowerShop
                     Console.WriteLine("The interval for the report must be bigger. Please try again!");
                 }
             } while (RequestedInterval <= FirstInterval);
+
+            NoBigBouquets = ReadQuantity("BIG bouquets");
+            Console.WriteLine("DEFINE big bouquet:");
+            ReadFlowerQuantity("for big bouquets");
+            bigBouquet = new BigBouquet(GenerateList(), NoBigBouquets);
+
+            NoMediumBouquets = ReadQuantity("MEDIUM bouquets");
+            Console.WriteLine("DEFINE medium bouquet: ");
+            ReadFlowerQuantity("for medium bouquets");
+            mediumBouquet = new MediumBouquet(GenerateList(), NoMediumBouquets);
+
+            NoSmallBouquets = ReadQuantity("SMALL bouquets");
+            Console.WriteLine("DEFINE small bouquets: ");
+            ReadFlowerQuantity("for small bouquets");
+            smallBouquet = new SmallBouquet(GenerateList(), NoSmallBouquets);
+
+            Console.WriteLine("\nInsert number of flowers sold by piece:");
+            ReadFlowerQuantity(String.Empty);
+            rose = new Rose(PriceRose, NoRoses);
+            gladioli = new Gladioli(PriceGladioli, NoGladiolis);
+            orchid = new Orchid(PriceOrchid, NoOrchids);
+
         }
 
         /// <summary>
         /// Generates the report.
         /// </summary>
-        internal void GenerateReport()
+        public void GenerateReport()
         {
-            Report report = new Report(FirstInterval, NoBigBouquets, NoMediumBouquets,
-                NoSmallBouquets, NoRoses, NoGladiolis, NoOrchids);
+            Report report = new Report(FirstInterval, bigBouquet, mediumBouquet, 
+                smallBouquet, rose, gladioli, orchid);
             report.CreateReport(RequestedInterval);
         }
 
@@ -89,24 +122,97 @@ namespace FlowerShop
         #region Private Methods
 
         /// <summary>
-        /// Reads the quantity of the products sold in the specified interval time.
+        /// Create the list of flowers for the bouquet.
         /// </summary>
-        /// <param name="entityName">Name of product.</param>
-        /// <param name="interval">The interval in wicth the product was sold.</param>
-        /// <returns>The number of products.</returns>
-        private int ReadQuantity(string entityName, Interval interval)
+        /// <returns>Returs the list of flowers.</returns>
+        private List<Flower> GenerateList()
         {
-            int number = -1;
-            
-            Console.WriteLine("Insert how many " + entityName + " where sold in one " + interval + ":");
+            List<Flower> flowers = new List<Flower>();
+
+            if (NoRoses > 0)
+            {
+                flowers.Add(new Rose(PriceRose, NoRoses));
+            }
+
+            if (NoGladiolis > 0)
+            {
+                flowers.Add(new Gladioli(PriceGladioli, NoGladiolis));
+            }
+
+            if (NoOrchids > 0)
+            {
+                flowers.Add(new Orchid(PriceOrchid, NoOrchids));
+            }
+
+            return flowers;
+        }
+
+        /// <summary>
+        /// Reads the quantities of flowers.
+        /// </summary>
+        /// <param name="bouquetName">The bouquet name for witch are read the quantities.</param>
+        private void ReadFlowerQuantity(string bouquetName)
+        {
+            NoRoses = ReadQuantity("roses " + bouquetName);
+            NoGladiolis = ReadQuantity("gladiolis " + bouquetName);
+            NoOrchids = ReadQuantity("orchids " + bouquetName);
+        }
+
+        /// <summary>
+        /// Rread the price for the flowers.
+        /// </summary>
+        /// <param name="flowerName">The name of the flower.</param>
+        /// <returns>Returns the price.</returns>
+        private double ReadPrice(string flowerName)
+        {
+            double number = -1;
+            Console.WriteLine(flowerName + ": ");
             do
             {
                 var value = Console.ReadLine();
                 number = GetNumber(value);
-                
+
             } while (number == -1);
 
             return number;
+        }
+
+        /// <summary>
+        /// Reads the quantity of the products sold.
+        /// </summary>
+        /// <param name="entityName">Name of product.</param>
+        /// <returns>The number of products.</returns>
+        private int ReadQuantity(string entityName)
+        {
+            int quantity = -1;
+            double number = -1;
+
+            Console.WriteLine("Insert quantity of " + entityName + ":");
+            do
+            {
+                var value = Console.ReadLine();
+
+                try
+                {
+                    number = GetNumber(value);
+                    quantity = Convert.ToInt32(number);
+                }
+                catch(Exception ex)
+                {
+                    Console.WriteLine("Exception details: " + ex.Message);
+                }
+                finally
+                {
+                    if ((double)quantity != number)
+                    {
+                        quantity = -1;
+                        Console.WriteLine("It should be an integer");
+                    }
+                }
+
+            } while (quantity == -1);
+
+            return quantity;
         }
 
         /// <summary>
@@ -114,9 +220,9 @@ namespace FlowerShop
         /// </summary>
         /// <param name="value">The string that has been given.</param>
         /// <returns>Returns the number.</returns>
-        private int GetNumber(string value)
+        private double GetNumber(string value)
         {
-            int result = -1;
+            double result = -1;
             if (value.Equals("q"))
             {
                 Console.WriteLine("The application is closed. Bye!");
@@ -124,7 +230,8 @@ namespace FlowerShop
             }
             else
             {
-                if (int.TryParse(value, out result))
+                if (double.TryParse(value, System.Globalization.NumberStyles.Any, 
+                    System.Globalization.CultureInfo.InvariantCulture, out result))
                 {
                     if (result<0)
                     {

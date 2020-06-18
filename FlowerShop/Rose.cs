@@ -4,31 +4,20 @@ using System.Text;
 
 namespace FlowerShop
 {
-    public class Rose : IFlower
+    public class Rose : Flower
     {
-        #region Properties
-        public int Price { get; private set; }
-
-        #endregion Properties
-
         #region Public Methods
 
         /// <summary>
-        /// Create a new instance of Rose.
+        /// Create new instance of Rose.
         /// </summary>
-        public Rose(): base()
+        /// <param name="price">Set the price.</param>
+        /// <param name="quantity">Set the quantity.</param>
+        public Rose(double price, int quantity)
+            : base(price, quantity) 
         {
-            DefinePrice();
+            Name = "Rose";
         }
-
-        /// <summary>
-        /// Define the value for the Price.
-        /// </summary>
-        public void DefinePrice()
-        {
-            Price = 10;
-        }
-
         #endregion Public Methods
     }
 }

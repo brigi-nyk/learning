@@ -4,32 +4,21 @@ using System.Text;
 
 namespace FlowerShop
 {
-    public class Orchid : IFlower
+    public class Orchid : Flower
     {
-        #region Properties
-
-        public int Price { get; private set; }
-
-        #endregion Properties
 
         #region Public Methods
 
         /// <summary>
-        /// Create a new instance of Orchid
+        /// Create new instance of Orchid.
         /// </summary>
-        public Orchid() : base()
+        /// <param name="price">Set the price.</param>
+        /// <param name="quantity">Set the quantity.</param>
+        public Orchid(double price, int quantity)
+            : base(price, quantity)
         {
-            DefinePrice();
+            Name = "Orchid";
         }
-
-        /// <summary>
-        /// Define the value for the Price.
-        /// </summary>
-        public void DefinePrice()
-        {
-            Price = 30;
-        }
-
-        #endregion Public Methods
     }
+    #endregion Public Methods
 }

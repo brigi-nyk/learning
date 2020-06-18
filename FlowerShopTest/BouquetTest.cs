@@ -1,5 +1,6 @@
 using FlowerShop;
 using System;
+using System.Collections.Generic;
 using Xunit;
 
 namespace FlowerShopTest
@@ -7,92 +8,139 @@ namespace FlowerShopTest
     public class BouquetTest
     {
         [Fact]
+        public void GetTotalQuantityRosesFromBigBouquetTest()
+        {
+            List<Flower> flowers = new List<Flower>()
+            {
+                new Rose(10,9),
+                new Gladioli(15,10),
+                new Orchid(30,3)
+            };
+            Bouquet bouquet = new BigBouquet(flowers, 20);
+            int count = bouquet.GetTotalQuantityOfFlower("Rose");
+
+            Assert.Equal(180, count);
+
+        }
+        
+        [Fact]
         public void GetTotalQuantityGladiolisFromBigBouquetTest()
         {
-            BigBouquet bouquet = new BigBouquet();
-            int count = bouquet.GetTotalQuantityGladiolis(80);
+            List<Flower> flowers = new List<Flower>()
+            {
+                new Rose(10,9),
+                new Gladioli(15,10),
+                new Orchid(30,3)
+            };
+            BigBouquet bouquet = new BigBouquet(flowers, 20);
+            int count = bouquet.GetTotalQuantityOfFlower("Gladioli");
 
-            Assert.Equal(800, count);
+            Assert.Equal(200, count);
 
         }
 
         [Fact]
         public void GetTotalQuantityOrchidsFromBigBouquetTest()
         {
-            BigBouquet bouquet = new BigBouquet();
-            int count = bouquet.GetTotalQuantityOrchids(80);
+            List<Flower> flowers = new List<Flower>()
+            {
+                new Rose(10,9),
+                new Gladioli(15,10),
+                new Orchid(30,3)
+            };
+            BigBouquet bouquet = new BigBouquet(flowers, 20);
+            int count = bouquet.GetTotalQuantityOfFlower("Orchid");
 
-            Assert.Equal(240, count);
-
-        }
-
-        [Fact]
-        public void GetTotalQuantityGladiolisFromMediumBouquetTest()
-        {
-            MediumBouquet bouquet = new MediumBouquet();
-            int count = bouquet.GetTotalQuantityGladiolis(60);
-
-            Assert.Equal(300, count);
-
-        }
-
-        [Fact]
-        public void GetTotalQuantityRosesFromBigBouquetTest()
-        {
-            Bouquet bouquet = new BigBouquet();
-            int count = bouquet.GetTotalQuantityRoses(80);
-
-            Assert.Equal(720, count);
+            Assert.Equal(60, count);
 
         }
 
         [Fact]
         public void GetTotalQuantityRosesFromMediumBouquetTest()
         {
-            Bouquet bouquet = new MediumBouquet();
-            int count = bouquet.GetTotalQuantityRoses(60);
+            List<Flower> flowers = new List<Flower>()
+            {
+                new Rose(10,6),
+                new Gladioli(15,5)
+            };
+            Bouquet bouquet = new MediumBouquet(flowers, 15);
+            int count = bouquet.GetTotalQuantityOfFlower("Rose");
 
-            Assert.Equal(360, count);
+            Assert.Equal(90, count);
 
         }
+
+        [Fact]
+        public void GetTotalQuantityGladiolisFromMediumBouquetTest()
+        {
+            List<Flower> flowers = new List<Flower>()
+            {
+                new Rose(10,6),
+                new Gladioli(15,5)
+            };
+            Bouquet bouquet = new MediumBouquet(flowers, 15);
+            int count = bouquet.GetTotalQuantityOfFlower("Gladioli");
+
+            Assert.Equal(75, count);
+
+        }
+
+        
 
         [Fact]
         public void GetTotalQuantityRosesFromSmallBouquetTest()
         {
-            Bouquet bouquet = new SmallBouquet();
-            int count = bouquet.GetTotalQuantityRoses(260);
+            List<Flower> flowers = new List<Flower>()
+            {
+                new Rose(10,5) };
+            Bouquet bouquet = new SmallBouquet(flowers, 65);
+            int count = bouquet.GetTotalQuantityOfFlower("Rose");
 
-            Assert.Equal(1300, count);
-
-        }
-
-        [Fact]
-        public void CalculatePriceBigBouquetTest()
-        {
-            Bouquet bouquet = new BigBouquet();
-            int count = bouquet.CalcuatePrice();
-
-            Assert.Equal(332, count);
+            Assert.Equal(325, count);
 
         }
 
         [Fact]
-        public void CalculatePriceMediumBouquetTest()
+        public void ComputePriceBigBouquetTest()
         {
-            Bouquet bouquet = new MediumBouquet();
-            int count = bouquet.CalcuatePrice();
+            List<Flower> flowers = new List<Flower>()
+            {
+                new Rose(10,9),
+                new Gladioli(15,10),
+                new Orchid(30,3)
+            };
+            BigBouquet bouquet = new BigBouquet(flowers, 20);
+            double price = bouquet.ComputePrice();
 
-            Assert.Equal(137, count);
+            Assert.Equal(332, price);
 
         }
 
         [Fact]
-        public void CalculatePriceSmallBouquetTest()
+        public void ComputePriceMediumBouquetTest()
         {
-            Bouquet bouquet = new SmallBouquet();
-            int count = bouquet.CalcuatePrice();
+            List<Flower> flowers = new List<Flower>()
+            {
+                new Rose(10,6),
+                new Gladioli(15,5)
+            };
+            Bouquet bouquet = new MediumBouquet(flowers, 15);
+            double price = bouquet.ComputePrice();
 
-            Assert.Equal(52, count);
+            Assert.Equal(137, price);
+
+        }
+
+        [Fact]
+        public void ComputePriceSmallBouquetTest()
+        {
+            List<Flower> flowers = new List<Flower>()
+            {
+                new Rose(10,5) };
+            Bouquet bouquet = new SmallBouquet(flowers, 65);
+            double price = bouquet.ComputePrice();
+
+            Assert.Equal(52, price);
 
         }
     }

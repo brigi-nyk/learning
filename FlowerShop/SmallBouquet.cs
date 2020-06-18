@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace FlowerShop
 {
@@ -9,15 +10,10 @@ namespace FlowerShop
         /// <summary>
         /// Create an instance of SmallBouquet.
         /// </summary>
-        public SmallBouquet() : base() { }
-        
-        /// <summary>
-        /// Define the components of the bouquet.
-        /// </summary>
-        protected override void DefineBouquet()
-        {
-            RoseQuantity = 5;
-        }
+        /// <param name="flowers">The list of flowers that creates the bouquet.</param>
+        /// <param name="quantity">Number of bouquets.</param>
+        public SmallBouquet(List<Flower> flowers, int quantity)
+            : base(flowers, quantity) { }
 
         #endregion Methods
     }

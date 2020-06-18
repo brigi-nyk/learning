@@ -1,55 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace FlowerShop
 {
     public class MediumBouquet:Bouquet
     {
-        #region Members
-
-        IFlower gladioli;
-        public int GladiolisQuantity { get; private set; }
-
-        #endregion Members
-
         #region Methods
 
         /// <summary>
-        /// Create an instance of MediumBouquets.
+        /// Create an instance of MediumBouquet.
         /// </summary>
-        public MediumBouquet() : base() 
-        {
-            gladioli = new Gladioli();
-        }
-
-        /// <summary>
-        /// Define the components of the bouquet.
-        /// </summary>
-        protected override void DefineBouquet()
-        {
-            RoseQuantity = 6;
-            GladiolisQuantity = 5;
-        }
-
-        /// <summary>
-        /// Calculate the price of the bouquet.
-        /// </summary>
-        /// <returns>Returns the price in int.</returns>
-        public override int CalcuatePrice()
-        {
-            int price = base.CalcuatePrice();
-            price += GladiolisQuantity * gladioli.Price;
-            return price;
-        }
-
-        /// <summary>
-        /// Gets the total quantity of the gladiolis from the bouquets.
-        /// </summary>
-        /// <param name="noBouquets">Number of bouquets.</param>
-        /// <returns>Returns the total number of gladiolis.</returns>
-        public int GetTotalQuantityGladiolis(int noBouquets)
-        {
-            return GladiolisQuantity * noBouquets;
-        }
+        /// <param name="flowers">The list of flowers that creates the bouquet.</param>
+        /// <param name="quantity">Number of bouquets.</param>
+        public MediumBouquet(List<Flower> flowers, int quantity)
+            : base(flowers, quantity) { }
 
         #endregion Methods
     }

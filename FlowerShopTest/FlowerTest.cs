@@ -11,30 +11,30 @@ namespace FlowerShopTest
         [Fact]
         public void GetRosePriceTest()
         {
-            IFlower flower = new Rose();
-            int count = flower.Price;
+            Flower flower = new Rose(10, 20);
+            double totalPrice = flower.Price *flower.Quantity;
 
-            Assert.Equal(10, count);
+            Assert.Equal(200, totalPrice);
 
         }
 
         [Fact]
         public void GetGladiolisPriceTest()
         {
-            IFlower flower = new Gladioli();
-            int count = flower.Price;
+            Flower flower = new Gladioli(15, 5);
+            double totalPrice = flower.Price * flower.Quantity;
 
-            Assert.Equal(15, count);
+            Assert.Equal(75, totalPrice);
 
         }
 
         [Fact]
         public void GetOrchidsPriceTest()
         {
-            IFlower flower = new Orchid();
-            int count = flower.Price;
+            Flower flower = new Orchid(30,10);
+            double totalPrice = flower.Price * flower.Quantity;
 
-            Assert.Equal(30, count);
+            Assert.Equal(300, totalPrice);
 
         }
     }

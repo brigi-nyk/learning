@@ -1,54 +1,56 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace FlowerShop
 {
-    public abstract class Bouquet
+    public abstract class Bouquet 
     {
         #region Members
 
-        protected IFlower rose;
-        public int RoseQuantity { get; protected set; }
-        public int PackingPrice { get; private set; }
+        public List<Flower> Flowers { get; private set; } = new List<Flower>();
+        public int Quantity { get; private set; }
 
         #endregion Memberts
 
         #region Methods
 
         /// <summary>
-        /// Create instance of an inherited class
+        /// Create an instance of a bouquet.
         /// </summary>
-        protected Bouquet()
+        /// <param name="flowers">The list of flowers that creates the bouquet.</param>
+        /// <param name="quantity">Number of bouquets.</param>
+        public Bouquet(List<Flower> flowers, int quantity)
         {
-            PackingPrice = 2;
-            DefineBouquet();
-            rose = new Rose();
+            Flowers.AddRange(flowers);
+            Quantity = quantity;
         }
 
         /// <summary>
-        /// Define each bouquet.
+        /// Computes the price of the bouquet by it's flowers.
         /// </summary>
-        abstract protected void DefineBouquet();
-
-        /// <summary>
-        /// Gets the total quantity of the roses from the bouquets.
-        /// </summary>
-        /// <param name="noBouquets">Number of bouquets.</param>
-        /// <returns>Returns the total number of roses.</returns>
-        virtual public int GetTotalQuantityRoses(int noBouquets)
+        /// <returns>Returns the price.</returns>
+        public double ComputePrice()
         {
-            return RoseQuantity * noBouquets;
+            double price = (from flower in Flowers
+                            select flower.Price * flower.Quantity).Sum();
+                        
+            return price + 2;
         }
 
         /// <summary>
-        /// Calculate the price of the bouquet.
+        /// Get the total quantity of a specified flower.
         /// </summary>
-        /// <returns>Returns the price in int.</returns>
-        virtual public int CalcuatePrice()
+        /// <param name="flowerName">The name of flower.</param>
+        /// <returns>Returns the quantity.</returns>
+        public int GetTotalQuantityOfFlower(string flowerName)
         {
-            int price = PackingPrice + (RoseQuantity * rose.Price);
-            return price;
+            int result = (from flower in Flowers
+                          where (flower.Name == flowerName)
+                          select flower.Quantity).Sum();
+
+            return result * Quantity;
         }
 
         #endregion Methods
