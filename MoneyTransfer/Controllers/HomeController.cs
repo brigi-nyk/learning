@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using MoneyTransfer.Data;
 using MoneyTransfer.Models;
 
 namespace MoneyTransfer.Controllers
@@ -12,6 +13,7 @@ namespace MoneyTransfer.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        //private MoneyTransferContext db = new MoneyTransferContext();
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -20,6 +22,16 @@ namespace MoneyTransfer.Controllers
 
         public IActionResult Index()
         {
+            return View();
+        }
+
+        [HttpGet("index")]
+        public IActionResult Index(TransactionViewModel model)
+        {
+            //if (ModelState.IsValid)
+            //{
+            //    model.CNP = 
+            //}
             return View();
         }
 

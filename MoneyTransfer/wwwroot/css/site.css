@@ -24,10 +24,28 @@ a {
   border-color: #1861ac;
 }
 
+/* Home page style
+-------------------------------------------------- */
+
+.money-transfer-form {
+    display: inline-block;
+    align-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', Tahoma, Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.money-transfer-field-item .transfer-fields{
+    width:150px;
+    display:inline-block;
+}
+
+.money-transfer-field-item .transfer-fields-input{
+    width:150px;
+}
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 @media (min-width: 768px) {
   html {

@@ -1,0 +1,48 @@
+﻿@model TransactionViewModel
+@{
+    ViewBag.Title = "Transaction";
+}
+
+
+@section Scripts{
+
+    <script src="~/node_modules/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/node_modules/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>
+}
+
+@*@Html.DropDownList("Currency", IEnumerable<DatCurrencyEnum>)*@
+
+<div class="money-transfer-form">
+    <form id="transfer-form" method="get">
+        <div class="money-transfer-field-item" asp-validation-summary="ModelOnly">
+            <label class="transfer-fields" asp-for="CNP">CNP:</label>
+            <input class="transfer-fields-input" asp-for="CNP" />
+            <span asp-validation-for="CNP"></span>
+            <br />
+
+            <label class="transfer-fields" asp-for="IBAN">IBAN:</label>
+            <input class="transfer-fields-input" asp-for="IBAN" />
+            <span asp-validation-for="IBAN"></span>
+            <br />
+
+            <label class="transfer-fields" asp-for="Amount">Amount:</label>
+            <input class="transfer-fields-input" asp-for="Amount" />
+            <span asp-validation-for="Amount"></span>
+            <br />
+
+            <label class="transfer-fields" asp-for="SenderCurrency">Sender Currency:</label>
+            <select class="transfer-fields-input currency" asp-for="SenderCurrency" 
+                    asp-items="Html.GetEnumSelectList<CurrencyEnum>()">
+            </select>
+            <span asp-validation-for="SenderCurrency"></span>
+            <br />
+
+            <label class="transfer-fields" asp-for="ReceiverCurrency">Receiver Currency:</label>
+            <select class="transfer-fields-input currency" asp-for="ReceiverCurrency"
+                    asp-items="Html.GetEnumSelectList<CurrencyEnum>()">
+            </select>
+            <span asp-validation-for="ReceiverCurrency"></span>
+            <br />
+        </div>
+    </form>
+</div>
