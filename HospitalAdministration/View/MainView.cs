@@ -65,6 +65,8 @@ namespace HospitalAdministration.View
             
         }
 
+        #region Main View
+
         private void GetMainMenu()
         {
             string userAnswer;
@@ -83,9 +85,15 @@ namespace HospitalAdministration.View
             {
                 case "0":
                     Console.WriteLine();
+                    Console.WriteLine("Apasati tasta 1 - Pentru savarea medicilor in fisier.");
+                    if (Console.ReadLine() == "1")
+                    {
+                        data.WriteDoctorsToFile(hospital);
+                        data.WriteMedicalActivityInFiles(hospital);
+                    }
+                    
+                    Console.WriteLine();
                     Console.WriteLine("Va multumim ca ati ales serviciile noastre!");
-                    data.WriteDoctorsToFile(hospital);
-                    data.WriteMedicalActivityInFiles(hospital);
                     Environment.Exit(0);
                     break;
                 case "1":
@@ -213,7 +221,7 @@ namespace HospitalAdministration.View
             //show all doctors available
             foreach (Doctor doctor in doctors)
             {
-                Console.WriteLine(doctor.ShortToString());
+                Console.WriteLine(doctor.ToShortString());
             }
             Doctor curentDoc = GetSelectedDoctor();
 
@@ -250,7 +258,6 @@ namespace HospitalAdministration.View
 
         private void AddNewDoctorView()
         {
-
             Doctor doctor;
             Console.WriteLine();
             Console.WriteLine("Adaugare medic:");
@@ -281,6 +288,8 @@ namespace HospitalAdministration.View
 
             AddDoctorView(doctor);
             hospital.AddDoctor(doctor);
+
+            Console.WriteLine("Medicul: {0} {1} a fost adaugat cu succes.", doctor.FirstName, doctor.LastName); ;
         }
 
         private void ShowDoctorsView()
@@ -320,9 +329,12 @@ namespace HospitalAdministration.View
                         return;
                     default:
                         Console.WriteLine("Nu ati introdus un numar din meniu! Incercati din nou!");
+                        valid = false;
                         break;
                 }
             } while (!valid);
+
+            ShowDoctorsView();
         }
 
         private void ShowReportsView()
@@ -330,6 +342,8 @@ namespace HospitalAdministration.View
             Console.WriteLine("Urmeaza a fi implementat!");
             GetMainMenu();
         }
+
+        #endregion Main View
 
         #region Doctors Views
 
@@ -362,8 +376,6 @@ namespace HospitalAdministration.View
                     valid = false;
                 }
             } while (!valid);
-
-            
 
             doctor.FirstName = firstName;
             doctor.LastName = lastName;
@@ -445,7 +457,7 @@ namespace HospitalAdministration.View
 
             foreach (Doctor doctor in ortopedistDocs)
             {
-                Console.WriteLine(doctor.LongToString());
+                Console.WriteLine(doctor.ToLongString());
             }
 
             Console.WriteLine();
@@ -456,7 +468,7 @@ namespace HospitalAdministration.View
 
             foreach (Doctor doctor in internalDocs)
             {
-                Console.WriteLine(doctor.LongToString());
+                Console.WriteLine(doctor.ToLongString());
             }
 
             Console.WriteLine();
@@ -467,22 +479,26 @@ namespace HospitalAdministration.View
 
             foreach (Doctor doctor in cardiologistDocs)
             {
-                Console.WriteLine(doctor.LongToString());
+                Console.WriteLine(doctor.ToLongString());
             }
 
-            ShowDoctorsView();
+            //ShowDoctorsView();
         }
 
         private void EditDoctorView()
         {
             Console.WriteLine();
             Console.WriteLine("Editare medic: ");
+            
             Doctor doctor = GetSelectedDoctor();
+            Console.WriteLine(doctor.ToLongString());
+            
             AddDoctorView(doctor);
 
             Console.WriteLine();
             Console.WriteLine("Noile date ale doctorului:");
-            Console.WriteLine(doctor.LongToString());
+            Console.WriteLine(doctor.ToLongString());
+            //ShowDoctorsView();
         }
 
         private void DeleteDoctorView()
@@ -495,6 +511,7 @@ namespace HospitalAdministration.View
             Console.WriteLine();
             Console.WriteLine("Noua lista a medicilor:");
             GetDocorsListView();
+            //ShowDoctorsView();
         }
 
         private void CalculateSalaryView()
@@ -503,6 +520,7 @@ namespace HospitalAdministration.View
             Console.WriteLine();
             Console.WriteLine("Doctorul {0} {1} are salariul: {2}", 
                 doctor.FirstName, doctor.LastName, doctor.Salary);
+            //ShowDoctorsView();
         }
 
         private Doctor GetSelectedDoctor()
@@ -536,7 +554,6 @@ namespace HospitalAdministration.View
         }
 
         #endregion Doctor Views
-
 
         #region Helper Methods
 

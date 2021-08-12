@@ -10,7 +10,6 @@ namespace HospitalAdministration.Data
     {
 
         public int Id { get; private set; }
-        
         public string FirstName { get; set; }
         public string  LastName { get; set; }
         public string CNP { get; set; }
@@ -20,11 +19,6 @@ namespace HospitalAdministration.Data
             {
                 return CalculateAgeOnCNP();
             }
-        }
-
-        internal void IncrementId(int index)
-        {
-            Id = index;
         }
 
         public DateTime HireDate { get; set; }
@@ -40,7 +34,6 @@ namespace HospitalAdministration.Data
             }
         }
 
-        
         public List<MedicalActivity> Activities;
 
         private float CalculateSalary()
@@ -75,6 +68,11 @@ namespace HospitalAdministration.Data
             return workingHours;
         }
 
+        internal void IncrementId(int index)
+        {
+            Id = index;
+        }
+
         public List<MedicalActivity> GetAllClinicalConsultActivities()
         {
             List<MedicalActivity> clinicalConsult = 
@@ -104,17 +102,18 @@ namespace HospitalAdministration.Data
 
             return recovery;
         }
+
         public override string ToString()
         {
             return string.Format(@"{0};{1};{2};{3};{4};{5};{6};{7};", FirstName, LastName, CNP, HireDate, UniversityName, ResidencyYears, ResidencyScor, RiscFactor);
         }
 
-        public string ShortToString()
+        public string ToShortString()
         {
             return string.Format(@"{0} - {1} {2} - Disponibil peste {3} ore", Id, FirstName, LastName, GetWorkingHours());
         }
 
-        public string LongToString()
+        public string ToLongString()
         {
             return string.Format(@"{0} - {1} {2} CNP - {3}; Data angajarii: {4}; Universitate: {5}; Rezidentiat ani: {6}, scor: {7}", Id, FirstName, LastName, CNP, HireDate, UniversityName, ResidencyYears, ResidencyScor);
         }

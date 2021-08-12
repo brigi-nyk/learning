@@ -140,6 +140,8 @@ namespace HospitalAdministration.Stream
                         doctors.Add(newDoctor);
                     }
                 }
+
+                Console.WriteLine("S-au adaugat cu succes {0} medici din fisierul {1}", doctors.Count, fileName);
             }
             else
             {
@@ -155,9 +157,7 @@ namespace HospitalAdministration.Stream
 
             if (File.Exists(clinicalConsultPath))
             {
-
                 Pacient pacient = new Pacient();
-
                 ClinicalConsult activity;
 
                 using (StreamReader sr = File.OpenText(clinicalConsultPath))
@@ -199,6 +199,8 @@ namespace HospitalAdministration.Stream
                         }
                     }
                 }
+
+                Console.WriteLine("S-au adaugat cu succes consultatiile din fisierul {0}", fileName);
             }
             else
             {
@@ -256,6 +258,8 @@ namespace HospitalAdministration.Stream
                         }
                     }
                 }
+                
+                Console.WriteLine("S-au adaugat cu succes operatiile din fisierul {0}", fileName);
             }
             else
             {
@@ -311,6 +315,8 @@ namespace HospitalAdministration.Stream
                         }
                     }
                 }
+            
+                Console.WriteLine("S-au adaugat cu succes recuperarile din fisierul {0}", fileName);
             }
             else
             {
